@@ -5,12 +5,12 @@ plugins {
 
 android {
     namespace = "com.cherrystudios.bamboo"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.cherrystudios.bamboo"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -30,6 +30,16 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures {
+        buildConfig = true
+        viewBinding = true
+        aidl = false
+        compose = false
+        prefab = false
+        renderScript = false
+        resValues = false
+        shaders = false
+    }
 }
 
 dependencies {
@@ -40,6 +50,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout.core)
     implementation(libs.androidx.lifecycle.livedata.ktx)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
+    implementation(libs.coil)
     testImplementation(libs.junit4)
     androidTestImplementation(libs.androidx.test.ext)
     androidTestImplementation(libs.androidx.test.espresso.core)

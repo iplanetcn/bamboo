@@ -6,27 +6,42 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.cherrystudios.bamboo.R
+import com.cherrystudios.bamboo.base.BaseFragment
+import com.cherrystudios.bamboo.databinding.FragmentMainBinding
 
-class MainFragment : Fragment() {
+class MainFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = MainFragment()
+        fun newInstance(): Fragment {
+            val fragment = MainFragment()
+            val args = Bundle()
+            fragment.arguments = args
+            return fragment
+        }
     }
 
-    private lateinit var viewModel: MainViewModel
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
 
+    private lateinit var viewModel: MainViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         // TODO: Use the ViewModel
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.fragment_main, container, false)
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
 }
